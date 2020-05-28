@@ -1,5 +1,6 @@
 # Stock Picker
 Rest service api that returns stock ticker prices using the yahoo finance api
+
 API Documentation available in the swagger.yaml file in this repository
 
 
