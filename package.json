@@ -1,0 +1,52 @@
+{
+  "name": "Stock-Exchange-Picker",
+  "version": "1.0.0",
+  "description": "Stock Exchange Picker",
+  "author": "Claudio Viola",
+  "main": "src/app.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bin": "./src/app.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "lint": "eslint src/** tests/**",
+    "lint-fix": "eslint src/** tests/** --fix",
+    "test:unit": "nyc --nycrc-path .nyrc_unit mocha --require source-map-support/register --full-trace \"tests/unit/**/*_test.js\" --exit --timeout 50000",
+    "test:integration": " nyc --nycrc-path .nyrc_integration mocha  --require source-map-support/register --full-trace \"tests/integration/**/*_test.js\" --exit --timeout 50000"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "algotrader": "^2.5.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "8.1.0",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "expect": "24.9.0",
+    "husky": "3.0.5",
+    "lint-staged": "9.2.5",
+    "mocha": "^7.2.0",
+    "nyc": "14.1.1",
+    "sinon": "7.4.2",
+    "source-map-support": "^0.5.19",
+    "supertest": "4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint-fix && npm run lint",
+      "git add"
+    ]
+  }
+}

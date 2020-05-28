@@ -1,0 +1,77 @@
+openapi: '3.0.0'
+info:
+  title: Stock Exchange Service
+  description: API endpoints for the Stock Exchange Service
+  version: 1.0.0
+  contact:
+    name: Claudio Viola
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  '/api/stocks':
+    get:
+      operationId: Get identites
+      summary:
+        Return a stock price
+      description:
+        Return a stock price if found
+      parameters:
+        - name: symbols
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns the stock price
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/stockprice'
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+components:
+  schemas:
+    stockprice:
+      description: Stock price schema
+      type: object
+      properties:
+        symbol:
+          type: string
+        date:
+          type: string
+          format: date
+        source:
+          type: string
+        price:
+          type: object
+          properties:
+            open:
+              type: number
+              format: float
+            high:
+              type: number
+              format: float
+            low:
+              type: number
+              format: float
+            close:
+              type: number
+              format: float
+            volume:
+              type: number
+          required:
+            - open
+            - high
+            - low
+            - close
+            - volume
+      required:
+        - symbol
+        - date
+        - source
+        - price
